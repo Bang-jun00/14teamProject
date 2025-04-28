@@ -15,16 +15,12 @@ public class Gameover : MonoBehaviour
         {
             //depeat
         }
-        if (gameOver == true && isCleared == true)
+        else if (gameOver == true && isCleared == true)
         {
             //victory
         }
-        if (gameOver == false)
+        else
         {
-            if (hp <= 0)
-            {
-                gameOver = true;
-            }
             if (killCount == 100)
             {
                 gameOver = true;
@@ -35,7 +31,20 @@ public class Gameover : MonoBehaviour
                 gameOver = true;
                 isCleared = true;
             }
+            if (hp <= 0)
+            {
+                gameOver = true;
+            }
+            
         }
         
+    }
+    void Clear()
+    {
+
+    }
+    void fail()
+    {
+
     }
 }
