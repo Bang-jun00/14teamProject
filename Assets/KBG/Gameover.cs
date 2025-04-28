@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Gameover : MonoBehaviour
 {
-    bool isCleared = false;
-    bool gameOver = false;
-    int hp;
-    int killCount;
-    int playTime;
+    private bool isCleared = false;
+    private bool gameOver = false;
+    private int hp;
+    private int killCount;
+    private int playTime;
     void Update()
     {
         if (gameOver == true && isCleared == false)
@@ -35,7 +35,6 @@ public class Gameover : MonoBehaviour
             {
                 gameOver = true;
             }
-            
         }
         
     }
@@ -43,7 +42,7 @@ public class Gameover : MonoBehaviour
     {
 
     }
-    void fail()
+    void Fail()
     {
 
     }
