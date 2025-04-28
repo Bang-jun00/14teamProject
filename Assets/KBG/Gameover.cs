@@ -8,7 +8,7 @@ public class Gameover : MonoBehaviour
     bool gameOver = false;
     int hp;
     int killCount;
-    int timer;
+    int playTime;
     void Update()
     {
         if (gameOver == true && isCleared == false)
@@ -30,7 +30,7 @@ public class Gameover : MonoBehaviour
                 gameOver = true;
                 isCleared = true;
             }
-            if (timer == 0)
+            if (playTime == 0)
             {
                 gameOver = true;
                 isCleared = true;
