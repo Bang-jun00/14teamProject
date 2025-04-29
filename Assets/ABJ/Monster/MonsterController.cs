@@ -15,6 +15,10 @@ public class MonsterController : MonoBehaviour
     public float monsterSpeed;
     public float monsterDamage;
 
+    [Header("KnockBack")]
+    public float monsterKnockBackTime = 0.5f;
+    private float monsterKnockBackDelay;
+    bool monsterKnockBack;
 
     void Start()
     {
@@ -27,6 +31,21 @@ public class MonsterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = (target.position - transform.position).normalized * monsterSpeed;
+        
+        if(monsterKnockBackDelay > 0 )
+        {
+            monsterKnockBackDelay = Time.deltaTime;
+
+            if(monsterSpeed > 0) //스피드가 0보다 작으면
+            {
+                monsterSpeed -= monsterSpeed * 1.5f; //이동속도의 1.5배만큼 감소(뒤로 이동)
+            }
+
+            if(monsterKnockBackDelay <= 0) //0보다 딜레이가 작거나 같으면
+            {
+                monsterSpeed = Mathf.Abs(monsterSpeed * 0.5f); //절댓값으로 이동속도를 0.5만큼 곱하여 서서히 복구되게끔
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,18 +57,28 @@ public class MonsterController : MonoBehaviour
             if(axe != null)
             {
                 float damage = axe.AxeDamage;
-                TakeDamage(damage);
+                TakeDamage(damage, true);
             }
         }
     }
-    public void TakeDamage(float Damage)
+    public void TakeDamage(float damage)
     {
-        monsterCurrentHealth -= Damage;
+        monsterCurrentHealth -= damage;
         Debug.Log($"몬스터 피격받음 현재 체력 : {monsterCurrentHealth}");
 
         if(monsterCurrentHealth <= 0 )
         {
             Die();
+        }
+    }
+
+    public void TakeDamage(float damage, bool monsterKnockBack)
+    {
+        TakeDamage(damage);
+
+        if(monsterKnockBack == true)
+        {
+            monsterKnockBackDelay = monsterKnockBackTime;
         }
     }
 
