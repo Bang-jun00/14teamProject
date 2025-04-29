@@ -20,6 +20,9 @@ public class MonsterController : MonoBehaviour
     private float monsterKnockBackDelay;
     bool monsterKnockBack;
 
+    [Header("DropPickUp")]
+    public GameObject expOrbPrefab;
+
     void Start()
     {
         monsterCurrentHealth = monsterMaxHealth; // 스타트시 체력 초기화
@@ -91,6 +94,12 @@ public class MonsterController : MonoBehaviour
     private void Die()
     {
         Debug.Log("몬스터 사망");
+        
+        if(expOrbPrefab != null )
+        {
+            Instantiate(expOrbPrefab, transform.position, Quaternion.identity);
+        }
+        
         monsterPool.ReturnMonster(gameObject);
     }
    

@@ -166,3 +166,4 @@ MonoBehaviour:
   monsterSpeed: 2
   monsterDamage: 10
   monsterKnockBackTime: 0.5
+  expOrbPrefab: {fileID: 3422488198926241300, guid: 0edea234e0e791347abdb8c555a5d908, type: 3}
