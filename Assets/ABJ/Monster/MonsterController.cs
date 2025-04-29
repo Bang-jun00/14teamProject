@@ -5,16 +5,27 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
     MonsterPool monsterPool; //참조
-    
+
+    private Transform target;
+    Rigidbody2D rb;
+
     [Header("MonsterStat")]
     public float monsterMaxHealth = 100f;
     public float monsterCurrentHealth;
     public float monsterSpeed;
     public float monsterDamage;
 
+
     void Start()
     {
         monsterCurrentHealth = monsterMaxHealth; // 스타트시 체력 초기화
+
+        target = FindObjectOfType<PlayerMovement>().transform;
+    }
+
+    void Update()
+    {
+        rb.velocity = (target.position - transform.position).normalized * monsterSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
