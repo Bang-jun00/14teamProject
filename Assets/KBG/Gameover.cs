@@ -1,56 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
-
-public class Gameover : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
-    public void PlayerDiedScene()
-    {
-        SceneManager.LoadScene("GameOverScene");
-    }
-    
+    public static GameOver Instance;
 
+    public UnityEvent OnPlayerDied = new UnityEvent();
 
-    private bool isCleared = false;
-    private bool gameOver = false;
-    private int hp;
-    private int killCount;
-    private int playTime;
-    void Update()
+    public bool IsGameOvered;
+
+    [SerializeField] private GameObject Player;
+
+    [Header("UI")]
+    [SerializeField] private GameObject PlayerDiedPanel;
+
+    private void Awake()
     {
-        if (gameOver == true && isCleared == false)
+        if (Instance == null)
         {
-            //depeat
-        }
-        else if (gameOver == true && isCleared == true)
-        {
-            //victory
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            if (killCount == 100)
-            {
-                gameOver = true;
-                isCleared = true;
-            }
-            if (playTime == 0)
-            {
-                gameOver = true;
-                isCleared = true;
-            }
-            if (hp <= 0)
-            {
-                gameOver = true;
-            }
+            Destroy(gameObject);
         }
-
     }
-    public void GameOver()
+    private void OnEnable()
     {
-
+        OnPlayerDied.AddListener(PlayerDied);
     }
-    
+
+    public void PlayerDied()
+    {
+        Player.SetActive(false);
+        IsGameOvered = true;
+        PlayerDiedPanel.SetActive(true);
+    }
+    private void OnDisable()
+    {
+        OnPlayerDied.RemoveListener(PlayerDied);
+    }
 
 }

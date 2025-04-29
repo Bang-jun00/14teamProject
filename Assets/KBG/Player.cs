@@ -14,11 +14,11 @@ public class Player : MonoBehaviour
     {
         if (stats.currentHealth <= 0)
         {
-            GameOverCL.Instance.OnPlayerDied.Invoke();
+            GameOver.Instance.OnPlayerDied.Invoke();
         }
         if (killCount == 100)
         {
-            GameOverCL.Instance.OnGameClear.Invoke();
+            GameClear.Instance.OnGameClear.Invoke();
         }
         
     }

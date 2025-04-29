@@ -13,7 +13,11 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameOverCL.Instance.IsGameOvered)
+        if (GameOver.Instance.IsGameOvered)
+        {
+            //ReturnPool;
+        }
+        if (GameClear.Instance.IsGameCleared)
         {
             //ReturnPool;
         }
