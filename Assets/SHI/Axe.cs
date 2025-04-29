@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Axe : MonoBehaviour
 {
     //도끼가 위로 날라간다 각도는 -45~45도
@@ -19,19 +20,23 @@ public class Axe : MonoBehaviour
     [SerializeField]public float AxeAttackDuration = 5f; //공격 지속시간
     [SerializeField]public float AxeAttackDelay = 0.5f; //공격 딜레이
     [SerializeField]public float AxeThrowSpeed = 1f; //공격속도
-    [SerializeField]public float AxeAttackrandomAngle = 45f;    //공격 각도
+    [SerializeField]public float AxeAttackrandomAngle = 25f;    //공격 각도
     [Range(0,5)]
     [SerializeField]public int Axelevel = 1; //도끼 레벨
     [SerializeField]public CircleCollider2D AxeAttackRangeCollider; //공격 범위 콜라이더
 
     WaitForSeconds axedelay = new WaitForSeconds(0.5f); //딜레이 시간 설정
+    WaitForSeconds axeduration = new WaitForSeconds(5f); //딜레이 시간 설정
 
     public List<GameObject> Axeslot = new List<GameObject>(); //도끼 슬롯 리스트
+     //랜덤 객체 생성
     public GameObject AxePrefab; //도끼 프리팹
-    public float axeattackdelay;
+    
+    public Vector2 vector2; //  도끼 각도?
     public void Start()
     {
-        axedelay = new WaitForSeconds(AxeAttackDuration); //딜레이 시간 설정
+        axeduration = new WaitForSeconds(AxeAttackDuration-(Axelevel * AxeAttackDelay)); //후딜레이 시간 설정
+        axedelay = new WaitForSeconds(AxeAttackDelay); //공격 간격 딜레이 시간 설정 
         AxeAttackRangeCollider.radius = AxeAttackRange; //공격 범위 설정
 
         for (int i = 0; i < 5; i++)
@@ -45,11 +50,11 @@ public class Axe : MonoBehaviour
     }
     public void OnEnable()
     {
-       
-        
-        
-            //도끼를 던지는 함수
-            StartCoroutine(ThrowAxe());
+       //System.Random random = new System.Random(); //랜덤 객체 생성
+        //Random.Range(-AxeAttackrandomAngle, AxeAttackrandomAngle); //랜덤 각도 설정
+
+        //도끼를 던지는 함수
+        StartCoroutine(ThrowAxe());
         
     }
 
@@ -59,15 +64,18 @@ public class Axe : MonoBehaviour
         for (int i = 0; i < Axelevel; i++)
         {
             GameObject axe = Axeslot[i]; //도끼 슬롯 리스트에서 도끼 가져오기
-            axe.SetActive(true); //도끼 활성화
+            //axe.SetActive(true); //도끼 활성화 (의문) 
             axe.transform.position = transform.position; //도끼 위치 설정
             Rigidbody2D rb = axe.GetComponent<Rigidbody2D>(); //도끼 리지드바디 가져오기
-            rb.AddForce(transform.up * AxeThrowSpeed, ForceMode2D.Impulse); //도끼 위로 날리기
-            
+            //rb.AddForce(transform.up * AxeThrowSpeed , ForceMode2D.Impulse); //도끼 위로 날리기
+            //rb.AddForce(transform.right * Random.Range(-AxeAttackrandomAngle, AxeAttackrandomAngle), ForceMode2D.Impulse); //랜덤 각도 설정
+            vector2 = new Vector2(Random.Range(-AxeAttackrandomAngle, AxeAttackrandomAngle), 1).normalized; //도끼 각도 설정
+            rb.AddForce(vector2 * AxeThrowSpeed, ForceMode2D.Impulse); //랜덤 각도 설정
             yield return axedelay; //공격 지속시간 대기
             rb.velocity = Vector2.zero; //도끼 속도 초기화
             axe.SetActive(false); //도끼 비활성화
         }
+        yield return axeduration; //코루틴 종료
     }
 
 
