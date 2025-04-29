@@ -6,7 +6,7 @@ public class PlayerWeaponFire : MonoBehaviour
 {
     public Transform weaponFirePoint;
     private List<GameObject> weapons = new List<GameObject>();
-
+    
     private void Awake()
     {
         if (weaponFirePoint == null)
