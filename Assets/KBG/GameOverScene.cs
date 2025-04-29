@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Gameover : MonoBehaviour
+public class GameOverScene : MonoBehaviour
 {
     public int hp = 100;
 

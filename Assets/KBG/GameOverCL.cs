@@ -1,12 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameOverCL : MonoBehaviour
 {
     public static GameOverCL Instance;
 
-    int playerHealth;
+    public UnityEvent OnPlayerDied = new UnityEvent();
+
+    public UnityEvent OnGameClear = new UnityEvent();
+
+    public bool IsGameOvered;
+    public bool IsGameCleared;
+
+    [SerializeField] private GameObject Player;
+
+    [Header("UI")]
+    [SerializeField] private GameObject PlayerDiedPanel;
+    [SerializeField] private GameObject GameClearPanel;
 
     private void Awake()
     {
@@ -20,26 +33,31 @@ public class GameOverCL : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
+    private void OnEnable()
     {
-        
+        OnPlayerDied.AddListener(GameOver);
     }
-    void Update()
-    {
-        
-    }
+    
     public void GameOver()
     {
-
+        Clear();
+        Fail();
+        
     }
-
-    public void TakeHit()
+    private void OnDisable()
     {
-        playerHealth--;
-
-        if (playerHealth <= 0)
-        {
-            GameOverCL.Instance.GameOver();
-        }
+        OnPlayerDied.RemoveListener(GameOver);
+    }
+    public void Fail()
+    {
+        Player.SetActive(false);
+        IsGameOvered = true;
+        PlayerDiedPanel.SetActive(true);
+    }
+    public void Clear()
+    {
+        Player.SetActive(false);
+        IsGameCleared = true;
+        GameClearPanel.SetActive(true);
     }
 }
