@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
         if (playerHealth <= 0)
         {
-            GameOverCL.Instance.GameOver();
+            GameOverCL.Instance.OnPlayerDied.Invoke();
         }
     }
 }

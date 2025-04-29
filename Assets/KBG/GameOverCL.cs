@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameOverCL : MonoBehaviour
 {
     public static GameOverCL Instance;
 
-    int playerHealth;
+    public UnityEvent OnPlayerDied = new UnityEvent();
 
     private void Awake()
     {
@@ -20,9 +22,9 @@ public class GameOverCL : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
+    private void OnEnable()
     {
-        
+        OnPlayerDied.AddListener(GameOver);
     }
     void Update()
     {
@@ -32,14 +34,9 @@ public class GameOverCL : MonoBehaviour
     {
 
     }
-
-    public void TakeHit()
+    private void OnDisable()
     {
-        playerHealth--;
-
-        if (playerHealth <= 0)
-        {
-            GameOverCL.Instance.GameOver();
-        }
+        OnPlayerDied.RemoveListener(GameOver);
     }
+
 }
