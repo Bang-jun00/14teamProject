@@ -24,6 +24,13 @@ public class MonsterPool : MonoBehaviour
         {
             GameObject monster = monsterPool.Pop();
             monster.SetActive(true);
+            
+            MonsterController monsterController = monster.GetComponent<MonsterController>();
+            if(monsterController != null)
+            {
+                monsterController.ResetMonsterHealth();
+            }
+                        
             return monster;
         }
         else
@@ -34,7 +41,7 @@ public class MonsterPool : MonoBehaviour
     }
 
     public void ReturnMonster(GameObject monster)
-    {
+    {               
         monster.SetActive(false);
         monsterPool.Push(monster);
     }
