@@ -38,7 +38,7 @@ public class MonsterController : MonoBehaviour
 
             if(monsterSpeed > 0) //스피드가 0보다 작으면
             {
-                monsterSpeed -= monsterSpeed * 1.5f; //이동속도의 1.5배만큼 감소(뒤로 이동)
+                monsterSpeed = -monsterSpeed * 2f; //이동속도의 1.5배만큼 감소(뒤로 이동)
             }
 
             if(monsterKnockBackDelay <= 0) //0보다 딜레이가 작거나 같으면
