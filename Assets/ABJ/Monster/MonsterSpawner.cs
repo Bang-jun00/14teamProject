@@ -9,7 +9,7 @@ public class MonsterSpawner : MonoBehaviour
     public float timeToSpawn = 2f; //적이 생성되는 간격
     private float spawnTimer; //간격을 저장해줄 타이머
     
-    public Transform target;
+    private Transform target;
 
     [Header("SpawnPoint")]
     public Transform maxSpawn, minSpawn;
