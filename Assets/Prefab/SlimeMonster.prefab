@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5733028012827846372}
   - component: {fileID: 1908870205096654755}
   - component: {fileID: 7733856953405712268}
-  - component: {fileID: -2861454342723755546}
   m_Layer: 0
   m_Name: SlimeMonster
   m_TagString: Monster
@@ -166,17 +165,4 @@ MonoBehaviour:
   monsterCurrentHealth: 0
   monsterSpeed: 2
   monsterDamage: 10
---- !u!114 &-2861454342723755546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3368918673217704633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cbf56e719712b044bf8454cb71f2fc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterPrefab: {fileID: 3368918673217704633}
-  poolSize: 500
+  monsterKnockBackTime: 0.5

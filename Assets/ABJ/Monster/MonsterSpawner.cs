@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
-{        
+{
+    private MonsterPool monsterPool;
+
     [Header("Spawner")]
     public GameObject monsterSpawn; //내가 스폰 시켜줄 프리팹
     public float timeToSpawn = 2f; //적이 생성되는 간격
@@ -19,8 +21,9 @@ public class MonsterSpawner : MonoBehaviour
         spawnTimer = timeToSpawn;
 
         GameObject player = FindObjectOfType<PlayerMovement>().gameObject;
-
         target = player.transform;
+
+        monsterPool = FindObjectOfType<MonsterPool>();
     }
 
     void Update()
@@ -31,7 +34,9 @@ public class MonsterSpawner : MonoBehaviour
         {
             spawnTimer = timeToSpawn;
 
-            Instantiate(monsterSpawn, SelectSpawnPoint(), transform.rotation);
+            GameObject monster = monsterPool.GetMonster();
+            monster.transform.position = SelectSpawnPoint();
+            monster.transform.rotation = Quaternion.identity;
         }
         
         transform.position = target.position;  //스포너가 player를 따라다님
