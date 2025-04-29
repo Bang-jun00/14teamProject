@@ -1,9 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Gameover : MonoBehaviour
 {
+    public void PlayerDiedScene()
+    {
+        SceneManager.LoadScene("GameOverScene");
+    }
+    
+
+
     private bool isCleared = false;
     private bool gameOver = false;
     private int hp;
@@ -36,14 +45,12 @@ public class Gameover : MonoBehaviour
                 gameOver = true;
             }
         }
-        
+
     }
-    void Clear()
+    public void GameOver()
     {
 
     }
-    void Fail()
-    {
+    
 
-    }
 }
