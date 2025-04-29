@@ -25,6 +25,7 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = (target.position - transform.position).normalized * monsterSpeed;
     }
 
