@@ -34,7 +34,7 @@ public class MonsterController : MonoBehaviour
         
         if(monsterKnockBackDelay > 0 )
         {
-            monsterKnockBackDelay = Time.deltaTime;
+            monsterKnockBackDelay -= Time.deltaTime;
 
             if(monsterSpeed > 0) //스피드가 0보다 작으면
             {
