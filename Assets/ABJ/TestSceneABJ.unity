@@ -2090,7 +2090,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &218134340
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,7 +4059,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &388010633
 GameObject:
   m_ObjectHideFlags: 0
@@ -6173,7 +6173,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &729690627
 GameObject:
   m_ObjectHideFlags: 0
@@ -8142,7 +8142,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &1385080334
 GameObject:
   m_ObjectHideFlags: 0
@@ -10111,7 +10111,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &1493062665
 GameObject:
   m_ObjectHideFlags: 0
@@ -12080,7 +12080,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &1617372763
 GameObject:
   m_ObjectHideFlags: 0
@@ -14049,7 +14049,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &1939098648
 GameObject:
   m_ObjectHideFlags: 0
@@ -16018,7 +16018,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1 &1952721380
 GameObject:
   m_ObjectHideFlags: 0
@@ -17987,7 +17987,7 @@ MonoBehaviour:
   - {fileID: 729690628}
   - {fileID: 1952721381}
   - {fileID: 1385080335}
-  backgroundSize: {x: 0, y: 0}
+  backgroundSize: {x: 18, y: 10}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
