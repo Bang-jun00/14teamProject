@@ -13,6 +13,7 @@ public class GameClear : MonoBehaviour
     public bool IsGameCleared;
 
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Mon;
 
     [Header("UI")]
     [SerializeField] private GameObject GameClearPanel;
@@ -31,18 +32,19 @@ public class GameClear : MonoBehaviour
     }
     private void OnEnable()
     {
-        OnGameClear.AddListener(GameOver);
+        OnGameClear.AddListener(MissionComplete);
     }
 
-    public void GameOver()
+    public void MissionComplete()
     {
         Player.SetActive(false);
+        Mon.SetActive(false);
         IsGameCleared = true;
         GameClearPanel.SetActive(true);
     }
     private void OnDisable()
     {
-        OnGameClear.RemoveListener(GameOver);
+        OnGameClear.RemoveListener(MissionComplete);
     }
     
 }

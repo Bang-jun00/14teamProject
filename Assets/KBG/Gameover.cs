@@ -13,6 +13,7 @@ public class GameOver : MonoBehaviour
     public bool IsGameOvered;
 
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Mon;
 
     [Header("UI")]
     [SerializeField] private GameObject PlayerDiedPanel;
@@ -37,6 +38,7 @@ public class GameOver : MonoBehaviour
     public void PlayerDied()
     {
         Player.SetActive(false);
+        Mon.SetActive(false);
         IsGameOvered = true;
         PlayerDiedPanel.SetActive(true);
     }
