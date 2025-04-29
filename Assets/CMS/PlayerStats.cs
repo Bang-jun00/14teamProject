@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -11,9 +12,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int currentExp = 0;
     [SerializeField] private int maxExp = 100;
 
-    private float currentMaxHealth;
-    private float currentHealth;
-    private float currentMoveSpeed;
+    [Header("무적 설정")]
+    [SerializeField] private float invincibleDuration; // 무적 지속시간 
+    private bool isInvincible = false;
+
+    public float currentMaxHealth;
+    public float currentHealth;
+    public float currentMoveSpeed;
 
     private void Start()
     {
@@ -31,11 +36,21 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        if (isInvincible)
+        {
+            Debug.Log("무적 상태! 데미지를 받지 않음");
+            return;
+        }
+
         currentHealth -= damage;
+
+        Debug.Log($"플레이어 체력: {currentHealth}/{currentMaxHealth}");
         if (currentHealth <= 0)
         {
             Die();
         }
+
+        StartCoroutine(InvincibilityCoroutine());
     }
 
     //최대 체력 증가, 최대 체력이 증가하면 현재 체력도 같이 증가
@@ -85,6 +100,13 @@ public class PlayerStats : MonoBehaviour
         Playerlevel++;
         maxExp = Mathf.FloorToInt(maxExp * 1.2f);
         Debug.Log("레벨업! 현재 레벨: " + Playerlevel);
+    }
+
+    private IEnumerator InvincibilityCoroutine()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibleDuration);
+        isInvincible = false;
     }
 
 

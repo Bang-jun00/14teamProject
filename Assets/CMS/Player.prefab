@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 4576290058069465140}
   - component: {fileID: 4310769800829363935}
   - component: {fileID: 8086869308435632769}
-  - component: {fileID: 1647335832116118444}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -178,7 +177,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -209,6 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e03a1217d344304ba1b2b4e050d87a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashDuration: 0.2
+  dashSpeed: 20
+  dashCooldownTime: 3
 --- !u!114 &8086869308435632769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,16 +228,7 @@ MonoBehaviour:
   Playerlevel: 1
   currentExp: 0
   maxExp: 100
---- !u!114 &1647335832116118444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702179850679031917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0f749e27e975c547b80e2581c70b54c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponFirePoint: {fileID: 8502488035661404770}
+  invincibleDuration: 0.2
+  currentMaxHealth: 0
+  currentHealth: 0
+  currentMoveSpeed: 0
