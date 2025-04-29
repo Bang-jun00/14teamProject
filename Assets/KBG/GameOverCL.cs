@@ -35,6 +35,7 @@ public class GameOverCL : MonoBehaviour
     }
     private void OnEnable()
     {
+        OnGameClear.AddListener(GameOver);
         OnPlayerDied.AddListener(GameOver);
     }
     
@@ -46,6 +47,7 @@ public class GameOverCL : MonoBehaviour
     }
     private void OnDisable()
     {
+        OnGameClear.RemoveListener(GameOver);
         OnPlayerDied.RemoveListener(GameOver);
     }
     public void Fail()
