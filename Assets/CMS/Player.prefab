@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4576290058069465140}
   - component: {fileID: 4310769800829363935}
   - component: {fileID: 8086869308435632769}
+  - component: {fileID: 146578622679592925}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -232,3 +233,21 @@ MonoBehaviour:
   currentMaxHealth: 0
   currentHealth: 0
   currentMoveSpeed: 0
+--- !u!114 &146578622679592925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702179850679031917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb55a0419685e048a2ed80e8b8a42fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axePrefab: {fileID: 5248372815148543925, guid: 2f3c038fd11a0414d943725bb1ad4ab9, type: 3}
+  startpoint: {fileID: 8502488035661404770}
+  Axe: {fileID: 4754723042332264717, guid: 2f3c038fd11a0414d943725bb1ad4ab9, type: 3}
+  AxeAttackDuration: 5
+  AxeAttackDelay: 0.5
+  vector2: {x: 0, y: 0}

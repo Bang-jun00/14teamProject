@@ -25,6 +25,7 @@ public class MonsterController : MonoBehaviour
         monsterCurrentHealth = monsterMaxHealth; // 스타트시 체력 초기화
 
         target = FindObjectOfType<PlayerMovement>().transform;
+        monsterPool = FindObjectOfType<MonsterPool>();
     }
 
     void Update()
