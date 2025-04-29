@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7556788392300143836}
   - component: {fileID: 5358572691465643333}
   - component: {fileID: 4754723042332264717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Axe
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -163,10 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AxeDamage: 10
   AxeAttackRange: 1
-  AxeAttackDuration: 5
   AxeAttackDelay: 0.5
-  AxeThrowSpeed: 1
-  AxeAttackrandomAngle: 45
+  AxeThrowSpeed: 80
+  AxeAttackrandomAngle: 50
   Axelevel: 1
   AxeAttackRangeCollider: {fileID: 5358572691465643333}
   Axeslot: []
