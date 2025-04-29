@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
+    MonsterPool monsterPool; //참조
+    
     [Header("MonsterStat")]
     public float monsterMaxHealth = 100f;
     public float monsterCurrentHealth;
@@ -39,10 +41,15 @@ public class MonsterController : MonoBehaviour
         }
     }
 
+    public void ResetMonsterHealth()
+    {
+        monsterCurrentHealth = monsterMaxHealth;
+    }
+
     private void Die()
     {
         Debug.Log("몬스터 사망");
-        Destroy(gameObject);
+        monsterPool.ReturnMonster(gameObject);
     }
    
     
