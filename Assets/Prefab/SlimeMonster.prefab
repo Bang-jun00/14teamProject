@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 950722598398785967}
   - component: {fileID: 5733028012827846372}
   - component: {fileID: 1908870205096654755}
+  - component: {fileID: 7733856953405712268}
+  - component: {fileID: -2861454342723755546}
   m_Layer: 0
   m_Name: SlimeMonster
   m_TagString: Untagged
@@ -133,7 +135,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -148,3 +150,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7733856953405712268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368918673217704633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de108fdcb93f12418986529f701c099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterMaxHealth: 100
+  monsterCurrentHealth: 0
+  monsterSpeed: 2
+  monsterDamage: 10
+--- !u!114 &-2861454342723755546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368918673217704633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cbf56e719712b044bf8454cb71f2fc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterPrefab: {fileID: 3368918673217704633}
+  poolSize: 500

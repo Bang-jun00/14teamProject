@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4754723042332264717}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,4 +170,5 @@ MonoBehaviour:
   Axelevel: 1
   AxeAttackRangeCollider: {fileID: 5358572691465643333}
   Axeslot: []
-  AxePrefab: {fileID: 0}
+  AxePrefab: {fileID: 5248372815148543925}
+  vector2: {x: 0, y: 0}
