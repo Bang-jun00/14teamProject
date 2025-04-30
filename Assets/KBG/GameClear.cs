@@ -1,27 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class GameOver : MonoBehaviour
+public class GameClear : MonoBehaviour
 {
     //public GameManager gameManager;
 
-    public static GameOver Instance;
-
-    //public UnityEvent OnPlayerDied = new UnityEvent();
-
-    //public bool IsGameOvered;
-
+    public static GameClear Instance;
+    // 
+    //public UnityEvent OnGameClear = new UnityEvent();
+    // 
+    //public bool IsGameCleared;
+    // 
     [SerializeField] private GameObject Player;
     //[SerializeField] private GameObject Mon;
 
     [Header("UI")]
-    [SerializeField] private GameObject PlayerDiedPanel;
+    [SerializeField] private GameObject GameClearPanel;
+    [SerializeField] private Button nextStageBtn;
     [SerializeField] private Button retryBtn;
-
+    // 
     private void Awake()
     {
         
@@ -36,27 +33,25 @@ public class GameOver : MonoBehaviour
         //    Destroy(gameObject);
         //}
     }
-    
-
     private void Start()
     {
         Instance = this;
 
-        GameManager.Instance.OnPlayerDied.AddListener(PlayerDied);
+        GameManager.Instance.OnGameClear.AddListener(MissionComplete);
         retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
     }
 
-    public void PlayerDied()
+    public void MissionComplete()
     {
         Player.SetActive(false);
         //Mon.SetActive(false);
-        GameManager.Instance.IsGameOvered = true;
-        PlayerDiedPanel.SetActive(true);
+        GameManager.Instance.IsGameCleared = true;
+        GameClearPanel.SetActive(true);
     }
     private void OnDisable()
     {
-        GameManager.Instance.OnPlayerDied.RemoveListener(PlayerDied);
-        retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+        GameManager.Instance.OnGameClear.RemoveListener(MissionComplete);
+        retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
     }
 
 }

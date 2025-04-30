@@ -9,16 +9,22 @@ public class Player : MonoBehaviour
 
     public int killCount = 0;
 
+    public void ResetPlayerHealth()
+    {
+        stats.currentHealth = stats.currentMaxHealth;
+    }
+    
+
   
     void Update()
     {
         if (stats.currentHealth <= 0)
         {
-            GameOverCL.Instance.OnPlayerDied.Invoke();
+            GameManager.Instance.OnPlayerDied.Invoke();
         }
         if (killCount == 100)
         {
-            GameOverCL.Instance.OnGameClear.Invoke();
+            GameManager.Instance.OnGameClear.Invoke();
         }
         
     }
