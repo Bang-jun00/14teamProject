@@ -20,6 +20,13 @@ public class PlayerStats : MonoBehaviour
     public float currentHealth;
     public float currentMoveSpeed;
 
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
         currentMaxHealth = baseMaxHealth;
@@ -105,8 +112,21 @@ public class PlayerStats : MonoBehaviour
     private IEnumerator InvincibilityCoroutine()
     {
         isInvincible = true;
-        yield return new WaitForSeconds(invincibleDuration);
+
+        float blinkInterval = 0.1f;
+        float invincibleTime = 0f;
+        while (invincibleTime < invincibleDuration)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(blinkInterval);
+
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(blinkInterval);
+
+            invincibleTime += blinkInterval * 2;
+        }
         isInvincible = false;
+        spriteRenderer.enabled = true;
     }
 
 
