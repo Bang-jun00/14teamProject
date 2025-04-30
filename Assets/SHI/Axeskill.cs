@@ -32,6 +32,7 @@ public class Axeskill : MonoBehaviour
         while (true)
         {
             yield return axedelay; // 0.5초 대기 //?? 그냥 넣어짐;; 
+            
             shoot(); // 도끼 발사 함수 호출  //코루틴 안에서. 반복 실행하게 할것.
         }
     }
