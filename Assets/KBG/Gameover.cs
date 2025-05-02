@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
@@ -15,7 +12,7 @@ public class GameOver : MonoBehaviour
 
     //public bool IsGameOvered;
 
-    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Player0;
     //[SerializeField] private GameObject Mon;
 
     [Header("UI")]
@@ -24,7 +21,7 @@ public class GameOver : MonoBehaviour
 
     private void Awake()
     {
-        
+
         //if (Instance == null)
         //{
         //    Debug.LogError("GameManager.Instance가 null입니다!");
@@ -36,19 +33,39 @@ public class GameOver : MonoBehaviour
         //    Destroy(gameObject);
         //}
     }
-    
-
-    private void Start()
+    private void OnEnable()
     {
-        Instance = this;
-
-        GameManager.Instance.OnPlayerDied.AddListener(PlayerDied);
-        retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+        StartCoroutine(WaitForGameManager());
     }
+
+    private IEnumerator WaitForGameManager()
+    {
+        while (GameManager.Instance == null)
+            yield return null;
+
+        if (GameManager.Instance != null)
+        {
+            Instance = this;
+
+            GameManager.Instance.OnPlayerDied.AddListener(PlayerDied);
+            retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+        }
+    }
+
+
+    // private void Start()
+    // {
+    //     Instance = this;
+    // 
+    //     GameManager.Instance.OnPlayerDied.AddListener(PlayerDied);
+    //     retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+    // }
 
     public void PlayerDied()
     {
-        Player.SetActive(false);
+        Player0.SetActive(false);
+        GameManager.Instance.DeactivateWeapon();
+        //GameManager.Instance.DeactivateExpOrb();
         //Mon.SetActive(false);
         GameManager.Instance.IsGameOvered = true;
         PlayerDiedPanel.SetActive(true);
@@ -58,5 +75,6 @@ public class GameOver : MonoBehaviour
         GameManager.Instance.OnPlayerDied.RemoveListener(PlayerDied);
         retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
     }
-
+    
 }
+    

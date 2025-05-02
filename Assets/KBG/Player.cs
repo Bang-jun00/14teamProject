@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     {
         stats.currentHealth = stats.currentMaxHealth;
     }
+    public void ResetKillCount()
+    {
+        killCount = 0;
+    }
     
 
   
