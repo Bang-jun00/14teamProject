@@ -91,11 +91,11 @@ public class MonsterController : MonoBehaviour
         monsterCurrentHealth = monsterMaxHealth;
     }
 
-    private void Die()
+    public void Die()
     {
         Debug.Log("몬스터 사망");
-        
-        if(expOrbPrefab != null )
+        GameManager.Instance.AddKillCount();
+        if (expOrbPrefab != null )
         {
             Instantiate(expOrbPrefab, transform.position, Quaternion.identity);
         }

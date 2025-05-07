@@ -14,11 +14,14 @@ public class PlayerStats : MonoBehaviour
 
     [Header("무적 설정")]
     [SerializeField] private float invincibleDuration; // 무적 지속시간 
-    private bool isInvincible = false;
+    public bool isInvincible = false;
 
     public float currentMaxHealth;
     public float currentHealth;
     public float currentMoveSpeed;
+
+    [Header("스킬(스탯)포인트")]
+    public int skillPoints = 0; // 스킬 포인트
 
     private SpriteRenderer spriteRenderer;
 
@@ -98,6 +101,7 @@ public class PlayerStats : MonoBehaviour
             currentExp -= maxExp;
             LevelUp();
         }
+
     }
 
 
@@ -106,7 +110,17 @@ public class PlayerStats : MonoBehaviour
     {
         Playerlevel++;
         maxExp = Mathf.FloorToInt(maxExp * 1.2f);
+        skillPoints++;
+
+        StatUpgradeUI ui = FindObjectOfType<StatUpgradeUI>();
+        if(ui != null)
+            ui.UpdateUI();
+            else
+                Debug.Log("StatUpgradeUI를 찾을 수 없습니다.");
+        
         Debug.Log("레벨업! 현재 레벨: " + Playerlevel);
+
+       
     }
 
     private IEnumerator InvincibilityCoroutine()
