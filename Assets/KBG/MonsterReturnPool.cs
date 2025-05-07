@@ -7,6 +7,11 @@ public class MonsterReturnPool : MonoBehaviour
     public MonsterSpawner monsterSpawner;
     public GameManager gameManager;
 
+    void Awake()
+    {
+        if (gameManager == null)
+            gameManager = GameManager.Instance;
+    }
     public void ReturnAllMonsters()
     {
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");

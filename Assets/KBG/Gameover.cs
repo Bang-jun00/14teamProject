@@ -12,7 +12,7 @@ public class GameOver : MonoBehaviour
 
     //public bool IsGameOvered;
 
-    [SerializeField] private GameObject Player0;
+    [SerializeField] private GameObject Player;
     //[SerializeField] private GameObject Mon;
 
     [Header("UI")]
@@ -63,7 +63,7 @@ public class GameOver : MonoBehaviour
 
     public void PlayerDied()
     {
-        Player0.SetActive(false);
+        Player.SetActive(false);
         GameManager.Instance.DeactivateWeapon();
         //GameManager.Instance.DeactivateExpOrb();
         //Mon.SetActive(false);
@@ -72,8 +72,11 @@ public class GameOver : MonoBehaviour
     }
     private void OnDisable()
     {
-        GameManager.Instance.OnPlayerDied.RemoveListener(PlayerDied);
-        retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnPlayerDied.RemoveListener(PlayerDied);
+            retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+        }
     }
     
 }
