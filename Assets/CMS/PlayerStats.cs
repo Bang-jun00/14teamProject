@@ -23,11 +23,12 @@ public class PlayerStats : MonoBehaviour
     [Header("스킬(스탯)포인트")]
     public int skillPoints = 0; // 스킬 포인트
 
-    private SpriteRenderer spriteRenderer;
-
+    public SpriteRenderer spriteRenderer;
+    public Scan scan;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        scan = GetComponent<Scan>();
     }
 
     private void Start()
