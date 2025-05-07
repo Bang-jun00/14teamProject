@@ -56,11 +56,11 @@ public class MonsterController : MonoBehaviour
     {
         if(collision.CompareTag("Weapon"))
         {
-            Axe axe = collision.GetComponent<Axe>();
+            Allbullet axe = collision.GetComponent<Allbullet>();
 
             if(axe != null)
             {
-                float damage = axe.AxeDamage;
+                float damage = axe.damage;
                 TakeDamage(damage, true);
             }
         }

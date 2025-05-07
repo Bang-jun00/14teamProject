@@ -64,8 +64,9 @@ public class GameManager : MonoBehaviour
         //Player0.transform.position = respawnPoint.position;
         Player.SetActive(true);
 
-        Player.GetComponent<Axeskill>().Start();
-        //Player0.GetComponent<PlayerStats>().isInvincible = false; // 플레이어 무적상태 해제
+        //Player.GetComponent<Axeskill>().Start();
+        Player.GetComponent<PlayerStats>().isInvincible = false; // 플레이어 무적상태 해제
+        Player.GetComponent<PlayerStats>().spriteRenderer.enabled = true;
 
         //Mon.transform.position = spawnPoint.position;
         //Mon.SetActive(true);

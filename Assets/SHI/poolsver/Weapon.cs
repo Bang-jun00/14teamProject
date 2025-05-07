@@ -27,12 +27,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] public float Angle;
     
     // Update is called once per frame
-    Player player;
+    PlayerStats player;
     WaitForSeconds wait = new WaitForSeconds(3f);
     WaitForSeconds axewait = new WaitForSeconds(0.5f);
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
+        player = GetComponentInParent<PlayerStats>();
         
     }
     private void Start()
@@ -112,7 +112,7 @@ public class Weapon : MonoBehaviour
             }
             else
             {
-               shovel= GameManager.instance.pool.Get(prefabid).transform;
+               shovel= SGameManager.instance.pool.Get(prefabid).transform;
                 shovel.parent = transform;
             }
             shovel.parent = transform;
@@ -129,13 +129,13 @@ public class Weapon : MonoBehaviour
 
    public  void shoot()
     {
-        if(!player.scan.selecttarget)
+        if (!player.scan.selecttarget)
             return;
         //transform.LookAt(player.scan.selecttarget.position);
         Vector3 targetpos = player.scan.selecttarget.position;
         Vector3 dir = targetpos - transform.position;
         dir = dir.normalized;
-        Transform fireball =GameManager.instance.pool.Get(prefabid).transform;
+        Transform fireball = SGameManager.instance.pool.Get(prefabid).transform;
         fireball.position = transform.position;
         fireball.parent = transform;
         //fireball.rotation = Quaternion.identity;
@@ -165,7 +165,7 @@ public class Weapon : MonoBehaviour
 
     public void thorw()
     {
-        Transform axe = GameManager.instance.pool.Get(prefabid).transform;
+        Transform axe = SGameManager.instance.pool.Get(prefabid).transform;
         axe.position = transform.position;
         axe.parent = transform;
         Vector2 dir = new Vector2(Random.Range(-Angle, Angle+1), 100).normalized;
