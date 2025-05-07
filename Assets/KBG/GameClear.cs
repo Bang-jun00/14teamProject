@@ -14,7 +14,7 @@ public class GameClear : MonoBehaviour
     // 
     //public bool IsGameCleared;
     // 
-    [SerializeField] private GameObject Player0;
+    [SerializeField] private GameObject Player;
     //[SerializeField] private GameObject Mon;
 
     [Header("UI")]
@@ -66,7 +66,7 @@ public class GameClear : MonoBehaviour
 
     public void MissionComplete()
     {
-        Player0.SetActive(false);
+        Player.SetActive(false);
         GameManager.Instance.DeactivateWeapon();
         //GameManager.Instance.DeactivateExpOrb();
         //Mon.SetActive(false);
@@ -75,9 +75,12 @@ public class GameClear : MonoBehaviour
     }
     private void OnDisable()
     {
-        GameManager.Instance.OnGameClear.RemoveListener(MissionComplete);
-        retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
-        nextStageBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnGameClear.RemoveListener(MissionComplete);
+            retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+            nextStageBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+        }
     }
 
 }

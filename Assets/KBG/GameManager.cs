@@ -1,25 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player; //Player class에서 호출
+    public PlayerStats stats;
+    // public Player player; //Player class에서 호출
+    
 
     public static GameManager Instance; //GameManager Instance 선언 //gamemanager이 null일떄 gamemanager을 생성 or title scene
 
     public UnityEvent OnGameClear = new UnityEvent(); // OnGameClear라는 UnityEvent를 생성 후
     public UnityEvent OnPlayerDied = new UnityEvent(); // OnPlayerDied라는 UnityEvent를 생성 후
 
-    [SerializeField] private GameObject Player0; // Player라는 게임오브젝트 추가기능
+    [SerializeField] private GameObject Player; // Player라는 게임오브젝트 추가기능
     //[SerializeField] private Transform respawnPoint; // respawnPoint라는 좌표값 추가기능
     //[SerializeField] private GameObject Mon;
     //[SerializeField] private Transform spawnPoint;
 
     public bool IsGameCleared; // 클리어 bool함수
     public bool IsGameOvered; // 실패 bool함수
+
+    public int killCount = 0;
 
     [SerializeField] private GameObject GameClearPanel; // 게임클리어 패널 추가기능
     [SerializeField] private GameObject PlayerDiedPanel; // 게임실패 패널 추가기능
@@ -29,26 +35,21 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            Instance = this; // Instance가 null이면 GameManager Instance 동작
-            DontDestroyOnLoad(gameObject); // Instance가 동작중일땐 유지한다
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (Instance != this)
         {
-            Destroy(gameObject); // Instance가 동작중이 아닐땐 파괴한다
+            Destroy(gameObject);
+            return;
         }
     }
+
     void Update()
     {
-        if (IsGameCleared)
-        {
-            IsGameCleared = false;
-            GameClear.Instance.MissionComplete();
-        }
-        if (IsGameOvered)
-        {
-            IsGameOvered = false;
-            GameOver.Instance.PlayerDied();
-        }
+        PlayerHp0();
+
+        killCountMax();
     }
 
     public void GameStart()
@@ -57,20 +58,20 @@ public class GameManager : MonoBehaviour
         PlayerDiedPanel.SetActive(false);
         IsGameOvered = false;
         IsGameCleared = false;
-        player.ResetPlayerHealth(); //플레이어를 초기화해야 기능이 돌아온다. ex:도끼기능
-        player.ResetKillCount();
+        ResetPlayerHealth(); //플레이어를 초기화해야 기능이 돌아온다. ex:도끼기능
+        ResetKillCount();
         
         //Player0.transform.position = respawnPoint.position;
-        Player0.SetActive(true);
+        Player.SetActive(true);
 
-        Player0.GetComponent<Axeskill>().Start();
-        //Player0.GetComponent<PlayerStats>().isInvincible = false;
+        Player.GetComponent<Axeskill>().Start();
+        //Player0.GetComponent<PlayerStats>().isInvincible = false; // 플레이어 무적상태 해제
 
         //Mon.transform.position = spawnPoint.position;
         //Mon.SetActive(true);
     }
 
-    public void DeactivateWeapon()
+    public void DeactivateWeapon() // 무기 회수
     {
         GameObject[] objAxes = GameObject.FindGameObjectsWithTag("Weapon");
 
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
             objAxe.SetActive(false);
         }
     }
-    // public void DeactivateExpOrb()
+    // public void DeactivateExpOrb() // 경험치구슬 없애기
     // {
     //     GameObject[] objOrbs = GameObject.FindGameObjectsWithTag("Exp");
     // 
@@ -88,4 +89,45 @@ public class GameManager : MonoBehaviour
     //         objOrb.SetActive(false);
     //     }
     // }
+    public void PlayerHp0()
+    {
+        if (stats.currentHealth <= 0)
+        {
+            OnPlayerDied.Invoke();
+
+            if (IsGameOvered)
+            {
+                IsGameOvered = false;
+                GameOver.Instance.PlayerDied();
+            }
+        }
+    }
+    public void AddKillCount()
+    {
+        killCount++;
+        Debug.Log("잡은 몬스터 수 : " + killCount);
+    }
+    public void killCountMax()
+    {
+        if(killCount >= 1)
+        {
+            OnGameClear.Invoke();
+
+            if (IsGameCleared)
+            {
+                IsGameCleared = false;
+                GameClear.Instance.MissionComplete();
+            }
+        }
+    }
+    
+    public void ResetPlayerHealth()
+    {
+        stats.currentHealth = stats.currentMaxHealth;
+    }
+    public void ResetKillCount()
+    {
+        killCount = 0;
+    }
+    
 }
