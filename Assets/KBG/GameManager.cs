@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     }
     public void killCountMax()
     {
-        if(killCount >= 1)
+        if(killCount >= 20)
         {
             OnGameClear.Invoke();
 
