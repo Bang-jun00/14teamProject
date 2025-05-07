@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +14,7 @@ public class GameClear : MonoBehaviour
     // 
     //public bool IsGameCleared;
     // 
-    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Player0;
     //[SerializeField] private GameObject Mon;
 
     [Header("UI")]
@@ -33,17 +36,39 @@ public class GameClear : MonoBehaviour
         //    Destroy(gameObject);
         //}
     }
-    private void Start()
-    {
-        Instance = this;
 
-        GameManager.Instance.OnGameClear.AddListener(MissionComplete);
-        retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+    private void OnEnable()
+    {
+        StartCoroutine(WaitForGameManager());
     }
+
+    private IEnumerator WaitForGameManager()
+    {
+        while (GameManager.Instance == null)
+            yield return null;
+
+        if (GameManager.Instance != null)
+        {
+            Instance = this;
+
+            GameManager.Instance.OnGameClear.AddListener(MissionComplete);
+            retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+            nextStageBtn.onClick.AddListener(GameManager.Instance.GameStart);
+        }
+    }
+    // private void Start()
+    // {
+    //     Instance = this;
+    // 
+    //     GameManager.Instance.OnGameClear.AddListener(MissionComplete);
+    //     retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+    // }
 
     public void MissionComplete()
     {
-        Player.SetActive(false);
+        Player0.SetActive(false);
+        GameManager.Instance.DeactivateWeapon();
+        //GameManager.Instance.DeactivateExpOrb();
         //Mon.SetActive(false);
         GameManager.Instance.IsGameCleared = true;
         GameClearPanel.SetActive(true);
@@ -51,7 +76,8 @@ public class GameClear : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.OnGameClear.RemoveListener(MissionComplete);
-        retryBtn.onClick.AddListener(GameManager.Instance.GameStart);
+        retryBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
+        nextStageBtn.onClick.RemoveListener(GameManager.Instance.GameStart);
     }
 
 }
