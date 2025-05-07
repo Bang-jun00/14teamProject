@@ -110,11 +110,17 @@ public class PlayerStats : MonoBehaviour
     {
         Playerlevel++;
         maxExp = Mathf.FloorToInt(maxExp * 1.2f);
-
         skillPoints++;
+
+        StatUpgradeUI ui = FindObjectOfType<StatUpgradeUI>();
+        if(ui != null)
+            ui.UpdateUI();
+            else
+                Debug.Log("StatUpgradeUI를 찾을 수 없습니다.");
+        
         Debug.Log("레벨업! 현재 레벨: " + Playerlevel);
 
-        FindObjectOfType<StatUpgradeUI>().UpdateUI();
+       
     }
 
     private IEnumerator InvincibilityCoroutine()
